@@ -1,0 +1,49 @@
+# mpi
+#include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
+double omp_get_wtime(void);
+int euler(int number)
+{
+        int sNumber = number;
+        for(int i = 2; i*i <= number; ++i)
+        {
+                if(number % i == 0)
+                {
+                        while(number % i == 0)
+                        {
+                                number /= i;
+                        }
+                }
+        }
+        if(number > 1)
+        {
+                sNumber -= sNumber / number;
+        }
+        return sNumber;
+}
+int main (int argc, char *argv[])
+{
+        int nTheads = omp_get_num_threads();
+        int nMaxThreads = omp_get_max_threads();
+        printf("Parallel Execution: %f\n");
+        double parallelTime, endTimeForParallel;
+        double startTimeForParallel = omp_get_wtime();
+
+         for(int i = 2; i < 10000; i++)
+         {
+                 printf("O(%d) = %d\n", i, euler(i));
+         }
+         endTimeForParallel = omp_get_wtime();
+         parallelTime = endTimeForParallel - startTimeForParallel;
+
+
+        printf("ejecución secuencial : \n");
+        double sequentialTime,endTimeForSequential,startTimeForSequential = omp_get_wtime();
+        for(int i = 2; i < 10000; i++)
+        {
+                printf("O(%d) = %d\n", i, euler (i));
+        }
+        
+        return 0;
+}
