@@ -1,0 +1,27 @@
+#include "mpi.h"   // Biblioteca de MPI
+#include <iostream>
+using namespace std;
+double factorial(int k){
+	double aux=1;
+	for(int i = 2; i<=n ; i++){    // indica que aumenta uno en uno al valor
+		aux *= i;
+	}
+	return aux;
+}
+double e(int n){
+	double sum = 0;
+	for(int i = 0; i < n; i++){      // indica que aumenta uno en uno al valor
+		sum += 1/factorial(i);
+	}
+	return sum;
+}
+
+int main (){           // sirve como punto de partida para la ejecución del programa
+	int K;
+	cout <<"Cuantos terminos de salida : ";
+	cin  >> K;
+	printf("e = %f",e(n));
+	
+MPI_Finalize();
+	return 0;
+}
